@@ -1,7 +1,7 @@
 %Some introductionary lines here
 
 %% Part 1: Initialization
-
+clear; close; clc;
 ActualParam = class.Param;
 qd = class.quad;
 bf = class.BasFunc;
@@ -10,6 +10,7 @@ filename = 'myparam.dat';
 
 ActualParam = subroutines.init(ActualParam, filename); 
 ActualParam = subroutines.LGM(ActualParam);
+ActualParam = subroutines.NBE(ActualParam);
 %% Part 2: Matrix A
 
 

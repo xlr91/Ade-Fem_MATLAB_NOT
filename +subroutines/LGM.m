@@ -12,5 +12,9 @@ for k = 1:prm.Tne
 prm.Lgm(k,2) = prm.Lgm(k,1) + 1;
 prm.Lgm(k,3) = prm.Lgm(k,2) + prm.NumCst(2);
 prm.Lgm(k,4) = prm.Lgm(k,1) + prm.NumCst(2);
+
+%LGM(k,m) = n
+%k = element number, m = local node number
+%n = global node number
 end
 end
