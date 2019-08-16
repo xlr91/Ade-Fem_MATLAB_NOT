@@ -9,6 +9,7 @@ sparse = class.AIJ;
 filename = 'myparam.dat';
 
 ActualParam = subroutines.init(ActualParam, filename); 
+ActualParam = subroutines.LGM(ActualParam);
 %% Part 2: Matrix A
 
 
