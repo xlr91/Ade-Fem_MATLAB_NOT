@@ -1,6 +1,12 @@
 function prm = init(prm, filename)
-    %Call Init subroutine 
-    fileID  = fopen(filename);
+% INIT Initializes the Environment.
+%   prm = An object belonging to the Param Class
+%   filename = name of file to be loaded
+%
+%   Each section does a specific part in loading the parameters
+%   from the file into the program.
+%   See the init subroutine from Bagus' Code
+    
     C = importdata(filename);
 
     %uses function that converts arguments from text file
@@ -8,9 +14,9 @@ function prm = init(prm, filename)
     prm.xmax = extractstr(C, 5, 'num');
     prm.ymin = extractstr(C, 6, 'num');
     prm.ymax = extractstr(C, 7, 'num');
-
     prm.nbNC = extractstr(C, 11, 'num');
     prm.NumCst = zeros(1,prm.nbNC);
+    
     for i = 1:prm.nbNC
         prm.NumCst(i) = extractstr(C, i+11, 'num');
     end
@@ -47,12 +53,10 @@ function prm = init(prm, filename)
     end
 
     %Creating Node Coordinates
-
     prm.neX = prm.NumCst(2) - 1;
     prm.neY = prm.NumCst(3) - 1;
     prm.Tne = prm.neX*prm.neY;
     prm.Tnp = prm.NumCst(2)*prm.NumCst(3);
-
     prm.xg = zeros(1, prm.NumCst(2)*prm.NumCst(3));
     prm.yg = prm.xg;
 
