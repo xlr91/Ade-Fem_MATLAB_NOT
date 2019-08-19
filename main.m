@@ -12,6 +12,9 @@ ActualParam = subroutines.init(ActualParam, filename);
 ActualParam = subroutines.LGM(ActualParam);
 ActualParam = subroutines.NBE(ActualParam);
 %% Part 2: Matrix A
+qd = subroutines.quad_calc(ActualParam, qd);
+bf = subroutines.calAloc(ActualParam,qd,bf);
+    
 
 %% Part 3: Matrix RHS
 %% Part 4: Solving

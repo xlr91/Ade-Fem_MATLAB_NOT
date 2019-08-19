@@ -112,6 +112,6 @@ function prm = init(prm, filename)
     end 
     
     %Adding the w vector
-    prm.wx = extractdata(C,43,'fnc');
-    prm.wy = extractdata(C,44,'fnc');
+    prm.wx = extractdata(C,43,'func');
+    prm.wy = extractdata(C,44,'func');
 end
