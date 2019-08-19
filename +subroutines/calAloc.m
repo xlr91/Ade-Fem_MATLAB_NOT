@@ -23,7 +23,6 @@ function bf = calAloc(par, qd, bf)
     c = a; %ymin of boundaries
     d = b; %ymax of boundaries
 
-tic
     for k = 1:par.Tne
          xmin = par.leX(k,1);    
          xmax = par.leX(k,2);
@@ -95,6 +94,5 @@ tic
          
          
     end
-toc
 close(wb)
 end

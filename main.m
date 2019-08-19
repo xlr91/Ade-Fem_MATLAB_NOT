@@ -14,7 +14,8 @@ ActualParam = subroutines.NBE(ActualParam);
 %% Part 2: Matrix A
 qd = subroutines.quad_calc(ActualParam, qd);
 bf = subroutines.calAloc(ActualParam,qd,bf);
-    
+sparse = subroutines.GlobalMap(ActualParam, sparse);
+% Call GlobalMap
 
 %% Part 3: Matrix RHS
 %% Part 4: Solving
