@@ -37,4 +37,8 @@ fine properties
 2	 : number of parameters
 4	 : FineCst(1)  : number of fine points in X
 4	 : FineCst(2)  : number of fine points in Y
-
+-------------------------------
+velocity vector
+-------------------------------
+2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
+-2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)

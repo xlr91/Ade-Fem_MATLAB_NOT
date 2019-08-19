@@ -12,6 +12,7 @@ ActualParam = subroutines.init(ActualParam, filename);
 ActualParam = subroutines.LGM(ActualParam);
 ActualParam = subroutines.NBE(ActualParam);
 %% Part 2: Matrix A
+
 %% Part 3: Matrix RHS
 %% Part 4: Solving
 %% Part 5: Graphing/Saving idk yet whatever floats the bill

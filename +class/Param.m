@@ -30,5 +30,8 @@ classdef Param
     bcleft
     bcright
     
+    %string
+    wx
+    wy
     end
 end

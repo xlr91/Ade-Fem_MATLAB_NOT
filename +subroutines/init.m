@@ -10,20 +10,20 @@ function prm = init(prm, filename)
     C = importdata(filename);
 
     %uses function that converts arguments from text file
-    prm.xmin = extractstr(C, 4, 'num'); 
-    prm.xmax = extractstr(C, 5, 'num');
-    prm.ymin = extractstr(C, 6, 'num');
-    prm.ymax = extractstr(C, 7, 'num');
-    prm.nbNC = extractstr(C, 11, 'num');
+    prm.xmin = extractdata(C, 4, 'num'); 
+    prm.xmax = extractdata(C, 5, 'num');
+    prm.ymin = extractdata(C, 6, 'num');
+    prm.ymax = extractdata(C, 7, 'num');
+    prm.nbNC = extractdata(C, 11, 'num');
     prm.NumCst = zeros(1,prm.nbNC);
     
     for i = 1:prm.nbNC
-        prm.NumCst(i) = extractstr(C, i+11, 'num');
+        prm.NumCst(i) = extractdata(C, i+11, 'num');
     end
 
-    prm.nbPC = extractstr(C, 21, 'num');
+    prm.nbPC = extractdata(C, 21, 'num');
     for i = 1:prm.nbPC
-        prm.PhysCst(i) = extractstr(C, i+21, 'num');
+        prm.PhysCst(i) = extractdata(C, i+21, 'num');
     end
 
     prm.h(1) = (prm.xmax-prm.xmin) / (prm.NumCst(2)-1);
@@ -33,10 +33,10 @@ function prm = init(prm, filename)
     prm.delta = prm.PhysCst(6) * min(prm.h);
 
     %Boundary Conditions
-    prm.bctop = extractstr(C, 30, 'str');
-    prm.bcbottom = extractstr(C, 31, 'str');
-    prm.bcleft = extractstr(C, 32, 'str');
-    prm.bcright = extractstr(C, 33, 'str');
+    prm.bctop = extractdata(C, 30, 'str');
+    prm.bcbottom = extractdata(C, 31, 'str');
+    prm.bcleft = extractdata(C, 32, 'str');
+    prm.bcright = extractdata(C, 33, 'str');
 
     %creating the x and y coordinates
     prm.x = zeros(1,prm.NumCst(2));
@@ -109,5 +109,9 @@ function prm = init(prm, filename)
             j = j+1;
             i = i+1;
         end
-    end    
+    end 
+    
+    %Adding the w vector
+    prm.wx = extractdata(C,43,'fnc');
+    prm.wy = extractdata(C,44,'fnc');
 end
