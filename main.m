@@ -15,8 +15,12 @@ ActualParam = subroutines.NBE(ActualParam);
 qd = subroutines.quad_calc(ActualParam, qd);
 bf = subroutines.calAloc(ActualParam,qd,bf);
 sparse = subroutines.GlobalMap(ActualParam, sparse);
-% Call GlobalMap
+ActualParam = subroutines.bcond(ActualParam);
+sparse = subroutines.assembly(ActualParam, sparse, bf);
+sparse = subroutines.lagmul(ActualParam, sparse);
+%% Call Lagmul
 
+        
 %% Part 3: Matrix RHS
 %% Part 4: Solving
 %% Part 5: Graphing/Saving idk yet whatever floats the bill

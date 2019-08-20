@@ -42,21 +42,21 @@ function qd = quad_calc(par, qd)
             qd.quad_x0(4) = -0.538469310105683091036314420700;
             qd.quad_x0(5) = -0.906179845938663992797626878299D0;
         case 7
-            qd.quad_w(1) = 1;
-            qd.quad_w(2) = 1;
-            qd.quad_w(3) = 1;
-            qd.quad_w(4) = 1;
-            qd.quad_w(5) = 1;
-            qd.quad_w(6) = 1;
-            qd.quad_w(7) = 1;
+            qd.quad_w(1) = 0.129484966168870;
+            qd.quad_w(2) = 0.279705391489277;
+            qd.quad_w(3) = 0.381830050505119;
+            qd.quad_w(4) = 0.417959183673469;
+            qd.quad_w(5) = 0.381830050505119;
+            qd.quad_w(6) = 0.279705391489277;
+            qd.quad_w(7) = 0.129484966168870;
 
-            qd.quad_x0(1) = something;
-            qd.quad_x0(2) = something;
-            qd.quad_x0(3) = something;
-            qd.quad_x0(4) = something;
-            qd.quad_x0(5) = something;
-            qd.quad_x0(6) = something;
-            qd.quad_x0(7) = something;
+            qd.quad_x0(1) = 0.949107912342759;
+            qd.quad_x0(2) = 0.741531185599394;
+            qd.quad_x0(3) = 0.405845151377397;
+            qd.quad_x0(4) = 0;
+            qd.quad_x0(5) = -0.405845151377397;
+            qd.quad_x0(6) = -0.741531185599394;
+            qd.quad_x0(7) = -0.949107912342759;
         otherwise
             fprintf('Quadrature number not recognized\n')
             fprintf('Please double check\n')
