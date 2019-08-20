@@ -1,5 +1,12 @@
 function bf = calAloc(par, qd, bf)
-    %call calAloc
+% CALALOC Creates the local solutions for Matrix A.
+%   par = An object belonging to the Param Class
+%   qd = An object belonging to the quad class
+%   bf = An object belonging to the BasFunc class
+%
+%   This function also has a fancy wait bar due to how long it takes to 
+%   generate the local matrix solutions
+
     diam = par.PhysCst(7);
     nobs = par.NumCst(6) + 1;
 
@@ -23,7 +30,7 @@ function bf = calAloc(par, qd, bf)
     c = a; %ymin of boundaries
     d = b; %ymax of boundaries
 
-    for k = 1:par.Tne
+    for k = 1:par.Tne %for all elements
          xmin = par.leX(k,1);    
          xmax = par.leX(k,2);
          ymin = par.leY(k,1);
@@ -44,6 +51,7 @@ function bf = calAloc(par, qd, bf)
                  end
              end
          end
+         %Calculating the integrals
          for m = 1:par.NumCst(1)
              for n = 1:par.NumCst(1)
                  bf.Aloc(k,m,n) = 0;
@@ -74,13 +82,13 @@ function bf = calAloc(par, qd, bf)
                          diff = par.PhysCst(8)*(bf.dxf(m)*bf.dxf(n) + ...
                                 bf.dyf(m)*bf.dyf(n));
                          F_xy = diff + conv + sigma*bf.f(m)*bf.f(n);
-                         WF_xy = qd.quad_w(i)*qd.quad_w(j)*F_xy*((dx*dy)/4);
+                         WF_xy= qd.quad_w(i)*qd.quad_w(j)*F_xy*((dx*dy)/4);
                          bf.Aloc(k,m,n) = bf.Aloc(k,m,n) + WF_xy;
                      end
                  end
              end
          end
-
+         %Fancy Wait Bar
          if round(k/par.Tne*100) > round((k-1)/par.Tne*100)
             wbmsg = sprintf('calAloc In progress: %.1f%%', k/par.Tne*100);
             if ~exist('wb', 'var')
@@ -88,11 +96,7 @@ function bf = calAloc(par, qd, bf)
             else
                 waitbar((k-1)/par.Tne, wb, wbmsg);
             end
-        end
-         
-         
-         
-         
+         end
     end
 close(wb)
 end

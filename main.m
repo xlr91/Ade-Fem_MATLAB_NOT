@@ -5,7 +5,7 @@ clear; close; clc;
 ActualParam = class.Param;
 qd = class.quad;
 bf = class.BasFunc;
-sparse = class.AIJ;
+sp = class.AIJ;
 filename = 'myparam.dat';
 
 ActualParam = subroutines.init(ActualParam, filename); 
@@ -14,13 +14,10 @@ ActualParam = subroutines.NBE(ActualParam);
 %% Part 2: Matrix A
 qd = subroutines.quad_calc(ActualParam, qd);
 bf = subroutines.calAloc(ActualParam,qd,bf);
-sparse = subroutines.GlobalMap(ActualParam, sparse);
+sp = subroutines.GlobalMap(ActualParam, sp);
 ActualParam = subroutines.bcond(ActualParam);
-sparse = subroutines.assembly(ActualParam, sparse, bf);
-sparse = subroutines.lagmul(ActualParam, sparse);
-%% Call Lagmul
-
-        
+sp = subroutines.assembly(ActualParam, sp, bf);
+sp = subroutines.lagmul(ActualParam, sp);
 %% Part 3: Matrix RHS
 %% Part 4: Solving
 %% Part 5: Graphing/Saving idk yet whatever floats the bill

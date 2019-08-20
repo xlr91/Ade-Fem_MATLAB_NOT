@@ -1,4 +1,8 @@
 function qd = quad_calc(par, qd)
+% QUAD-CALC Loads up the requested Gaussian Quadrature parameters.
+%   par = An object belonging to the Param class
+%   qd = An object belonging to the quad class
+
     qd.quad_x0 = zeros(1, par.NumCst(4));
     qd.quad_w = qd.quad_x0;
     

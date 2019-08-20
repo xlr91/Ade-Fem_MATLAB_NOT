@@ -1,4 +1,6 @@
 function sparse = assembly(par, sparse, bf)
+% Assembly creates the sparse matrix elements A, IRN, and JCN.
+%   prm = An object belonging to the Param Class
     sparse.A = zeros(1, (sparse.nonzero + 2*par.Nbc));
     sparse.IRN = sparse.A;
     sparse.JCN = sparse.A;

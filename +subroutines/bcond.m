@@ -1,4 +1,7 @@
 function prm = bcond(prm)
+% BCOND Generates the boundary condition parameters.
+%   prm = An object belonging to the Param Class
+
     prm.tnode = zeros(1, prm.NumCst(2));
     prm.bnode = prm.tnode;
     prm.lnode = zeros(1, prm.NumCst(3));
@@ -31,7 +34,6 @@ function prm = bcond(prm)
     for i = 1:prm.NumCst(2)
         prm.tnode(i) = lt + (i-1);
     end
-
     if string(prm.bctop) == 'd'
         for i = 1:prm.NumCst(2)
             prm.qbc(i) = prm.tnode(i);
@@ -44,7 +46,6 @@ function prm = bcond(prm)
     for i = 1:prm.NumCst(2)
         prm.bnode(i) = i;
     end
-
     if string(prm.bcbottom) == 'd'
         for i = 1:prm.NumCst(2)
             prm.qbc(i+j) = prm.bnode(i);
@@ -58,23 +59,22 @@ function prm = bcond(prm)
         k = i*prm.NumCst(2);
         prm.rnode(i) = k;
     end
-
     if string(prm.bcright) == 'd'
         if string(prm.bctop) == 'd'
-            if string(prm.bcbottom) == 'd' 
+            if string(prm.bcbottom) == 'd' %if top, bottom and right are d
                for i = 2:prm.NumCst(3)-1
                    prm.qbc(j+(i-1)) = prm.rnode(i);
                    prm.qbcval(j+(i-1)) = prm.PhysCst(4);
                end
                j = j + prm.NumCst(3) - 2;
-            else
+            else %if bottom is not d
                 for i = 1:prm.NumCst(3) - 1
                     prm.qbc(i+j) = prm.rnode(i);
                     prm.qbcval(i+j) = prm.PhysCst(4);
                 end
                 j = j+prm.NumCst(3) - 1;
             end
-        elseif string(prm.bottom) == 'd'
+        elseif string(prm.bottom) == 'd' %if top is not d
             for i = 2, prm.NumCst(3)
                 prm.qbc(j+(i-1)) = prm.rnode(i);
                 prm.qbcval(j+(i-1)) = prm.PhysCst(4);
@@ -84,10 +84,10 @@ function prm = bcond(prm)
     end
 
     %Left
+    %follows similar logic to the right one
     for i = 1:prm.NumCst(3)
         prm.lnode(i) = prm.rnode(i) - prm.neX;
     end
-
     if string(prm.bcleft) == 'd'
         if string(prm.bctop) == 'd'
             if string(prm.bcbottom) == 'd' 

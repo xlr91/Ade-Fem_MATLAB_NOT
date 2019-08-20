@@ -78,9 +78,6 @@ function prm = init(prm, filename)
     end
 
     %Creating local element coordinates
-        %leXY(k,n) = x/y coordinates 
-        %k = element number
-        %n = local node number
     prm.leX = zeros(prm.neX*prm.neY, prm.NumCst(1));
     prm.leY = prm.leX;
 
