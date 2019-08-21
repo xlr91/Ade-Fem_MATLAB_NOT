@@ -111,4 +111,22 @@ function prm = init(prm, filename)
     %Adding the w vector
     prm.wx = extractdata(C,43,'func');
     prm.wy = extractdata(C,44,'func');
+    
+    %Adding Source Terms
+    
+    prm.nSource = extractdata(C, 48, 'num');
+    prm.sourceterms = zeros(prm.nSource, 5);
+    for k = 1:prm.nSource
+        str = split(C{48+k});
+        tempstr = string(str(1));
+        newstr = extractAfter(tempstr, '[');
+        prm.sourceterms(k,1) = str2double(newstr);
+        for i = 2:4
+            tempstr = string(str(i));
+            prm.sourceterms(k,i) = str2double(tempstr);
+        end
+        tempstr = string(str(5));
+        newstr = extractBefore(tempstr, ']');
+        prm.sourceterms(k,5) = str2double(newstr);
+    end
 end

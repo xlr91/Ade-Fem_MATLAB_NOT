@@ -14,7 +14,7 @@ numerical constants
 3	: numCst(3) : number of points in Y (10) , 3
 3	: numCst(4) : number of quadrature points (3)
 5000 	: numCst(5) : mumps upper bound memory allocation
-3      : numCst(6) : amount of obstacles (regular) in one axis (0), 1
+1      : numCst(6) : amount of obstacles (regular) in one axis (0), 1
 --------------------------------
 physical constants
 --------------------------------
@@ -24,7 +24,7 @@ physical constants
 3	 : PhysCst(3) :left bc. value (0) 
 4	 : PhysCst(4) :right bc. value (0) 
 0.1	 : PhysCst(5) :constant source term
-1	 : PhysCst(6) :penalization coefficient (beetween 1 ~ 2)
+1	 : PhysCst(6) :penalization coefficient (between 1 ~ 2)
 0.2      : PhysCst(7) :diameter of obstacles
 0.05     : PhysCst(8) :diffusion parameter
 d	 : top bc kind          (n : Neumann ;     d : Dirichlet)
@@ -42,3 +42,9 @@ velocity vector
 -------------------------------
 2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
 -2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)
+-------------------------------
+Source Terms
+-------------------------------
+2	 : number of source terms
+[-1 1 0.7 1 1]
+[-1 1 -1 -0.7 1]

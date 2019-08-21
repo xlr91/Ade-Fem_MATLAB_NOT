@@ -9,9 +9,10 @@ classdef Param
     %Integers
     nbNC; nbPC; Nbc;
     neX;neY;Tne;Tnp;
+    nSource;
     
     %Double Precision 2D
-    leX;leY
+    leX;leY; sourceterms;
     
     %Double Precision 1D-2
     h

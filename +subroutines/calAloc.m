@@ -29,7 +29,10 @@ function bf = calAloc(par, qd, bf)
     a = a - 0.5D0*diam*eps; %xmin of boundaries
     c = a; %ymin of boundaries
     d = b; %ymax of boundaries
-
+    
+    wxf = par.wx;
+    wyf = par.wy;
+    
     for k = 1:par.Tne %for all elements
          xmin = par.leX(k,1);    
          xmax = par.leX(k,2);
@@ -39,8 +42,8 @@ function bf = calAloc(par, qd, bf)
          ye = (ymin + ymax) / 2D0;
          dx = xmax - xmin;
          dy = ymax - ymin;
-         wx = par.wx(xe,ye);
-         wy = par.wy(xe,ye);
+         wx = wxf(xe,ye);
+         wy = wyf(xe,ye);
          sigma = 0D0;
 
          %Creating obstacle elements
