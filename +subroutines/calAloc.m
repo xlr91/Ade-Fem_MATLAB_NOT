@@ -45,7 +45,17 @@ function bf = calAloc(par, qd, bf)
          wx = wxf(xe,ye);
          wy = wyf(xe,ye);
          sigma = 0D0;
-
+         
+         %Fancy Wait Bar
+         if round(k/par.Tne*100) > round((k-1)/par.Tne*100)
+            wbmsg = sprintf('calAloc In progress: %.1f%%', k/par.Tne*100);
+            if ~exist('wb', 'var')
+                wb = waitbar((k-1)/par.Tne, wbmsg);
+            else
+                waitbar((k-1)/par.Tne, wb, wbmsg);
+            end
+         end
+         
          %Creating obstacle elements
          for m = 1:nobs
              for n = 1:nobs
@@ -90,15 +100,6 @@ function bf = calAloc(par, qd, bf)
                      end
                  end
              end
-         end
-         %Fancy Wait Bar
-         if round(k/par.Tne*100) > round((k-1)/par.Tne*100)
-            wbmsg = sprintf('calAloc In progress: %.1f%%', k/par.Tne*100);
-            if ~exist('wb', 'var')
-                wb = waitbar((k-1)/par.Tne, wbmsg);
-            else
-                waitbar((k-1)/par.Tne, wb, wbmsg);
-            end
          end
     end
 close(wb)
