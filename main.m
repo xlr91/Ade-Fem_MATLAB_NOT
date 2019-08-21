@@ -56,5 +56,11 @@ end
 %xg = par.xg;
 %yg = par.yg;
 %zg = x(1:par.Tnp).';
-surf(xg, yg, zg)
+surf(xg, yg, zg, 'FaceColor', 'interp', 'EdgeAlpha', '0.5')
+title('Flow of Transport Obeying the ADE, simulated using Finite Elements')
+xlabel('x axis')
+ylabel('y axis')
+zlabel('Concentration u')
+colorbar
 %% Part 6: Graphing/Saving idk yet whatever floats the bill
+save('soltec.mat', 'xg', 'yg', 'zg')
