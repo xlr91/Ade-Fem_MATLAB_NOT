@@ -14,6 +14,12 @@ function sp = GlobalMap(par, sp)
                     %checks all neighboring elements
                     for k1 = 1:8 
                         k2 = par.Nbe(k,k1);
+                        
+                        %justincase
+                        if k2 > par.Tne
+                            k2 = 0;
+                        end
+                       
                         if k2 ~= 0 %if neighbor exists
                             n1 = 0;
                             m1 = 0;
