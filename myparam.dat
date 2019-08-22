@@ -43,8 +43,8 @@ velocity vector
 2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
 -2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)
 -------------------------------
-Source Terms
+Source Terms (format it as [xmin xmax ymin ymax value])  
 -------------------------------
-2	 : number of source terms
-[-1 1 0.7 1 1]
-[-1 1 -1 -0.7 1]
+2	 : number of source terms 
+[-1 1 0.7 1 1]	: Source 1
+[-1 1 -1 -0.7 1]	: Source 2

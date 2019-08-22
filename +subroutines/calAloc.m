@@ -7,26 +7,30 @@ function bf = calAloc(par, qd, bf)
 %   This function also has a fancy wait bar due to how long it takes to 
 %   generate the local matrix solutions
 %
-%   This is the original, copied exactly as Bagus's code
+%   This is a copy of calAloc3, with key differences. It was realized the
+%   xr did not need to be in the j loop, so that removes a bunch of
+%   calculations from the for loop. Furthermore, the biggest improvement
+%   was loading the variables into this calAloc4 function rather than
+%   having the function call out external classes. This seems to have
+%   drastically increased the performance.
 
     diam = par.PhysCst(7);
     nobs = par.NumCst(6) + 1;
 
     bf.Aloc = zeros(par.Tne, par.NumCst(1), par.NumCst(1));
-    bf.f = zeros(1,par.NumCst(1));
-    bf.dxf = zeros(1,par.NumCst(1));
-    bf.dyf = zeros(1,par.NumCst(1));
+    bff = zeros(1,par.NumCst(1));
+    bfdxf = zeros(1,par.NumCst(1));
+    bfdyf = zeros(1,par.NumCst(1));
     a = zeros(1,nobs);
-
 
     eps = (par.xmax - par.xmin) / (nobs-1);
     if nobs == 0
         eps = 0; 
     end
-
     for m = 1:nobs
         a(m) = par.xmin + m*eps-eps;
     end 
+    
     b = a + 0.5D0*diam*eps; %xmax of boundaries
     a = a - 0.5D0*diam*eps; %xmin of boundaries
     c = a; %ymin of boundaries
@@ -34,7 +38,9 @@ function bf = calAloc(par, qd, bf)
     
     wxf = par.wx;
     wyf = par.wy;
-    
+    qdquad_x0 = qd.quad_x0;
+    qdquad_w = qd.quad_w;
+    D = par.PhysCst(8);
     for k = 1:par.Tne %for all elements
          xmin = par.leX(k,1);    
          xmax = par.leX(k,2);
@@ -66,38 +72,60 @@ function bf = calAloc(par, qd, bf)
                  end
              end
          end
+         
          %Calculating the integrals
          for m = 1:par.NumCst(1)
              for n = 1:par.NumCst(1)
                  bf.Aloc(k,m,n) = 0;
                  for i = 1:par.NumCst(4)
+                     xr = (dx/2)* qdquad_x0(i) + dx/2;
                      for j = 1:par.NumCst(4)
-                         %quadrature coordinates
-                         xr = (dx/2)* qd.quad_x0(i) + dx/2;
-                         yr = (dy/2)* qd.quad_x0(j) + dy/2;
-
-                         %basis functions
-                         bf.f(1) = (1-xr/dx)*(1-yr/dy);
-                         bf.f(2) = (xr/dx)*(1-yr/dy);
-                         bf.f(3) = (xr/dx)*(yr/dy);
-                         bf.f(4) = (1-xr/dx)*(yr/dy);
-
-                         %derivatives
-                         bf.dxf(1) = -1/dx + (yr/(dx*dy));
-                         bf.dyf(1) = -1/dy + (xr/(dx*dy));
-                         bf.dxf(2) = 1/dx - (yr/(dx*dy));
-                         bf.dyf(2) = -xr/(dx*dy);
-                         bf.dxf(3) = yr/(dx*dy);
-                         bf.dyf(3) = xr/(dx*dy);
-                         bf.dxf(4) = -yr/(dx*dy);
-                         bf.dyf(4) = 1/dy - (xr/(dx*dy));
+                         yr = (dy/2)* qdquad_x0(j) + dy/2;
+                         
+                         switch m
+                             case 1
+                                 bff(1) = (1-xr/dx)*(1-yr/dy);
+                                 bfdxf(1) = -1/dx + (yr/(dx*dy));
+                                 bfdyf(1) = -1/dy + (xr/(dx*dy));
+                             case 2
+                                 bff(2) = (xr/dx)*(1-yr/dy);
+                                 bfdxf(2) = 1/dx - (yr/(dx*dy));
+                                 bfdyf(2) = -xr/(dx*dy);
+                             case 3
+                                 bff(3) = (xr/dx)*(yr/dy);
+                                 bfdxf(3) = yr/(dx*dy);
+                                 bfdyf(3) = xr/(dx*dy);
+                             case 4
+                                 bff(4) = (1-xr/dx)*(yr/dy);
+                                 bfdxf(4) = -yr/(dx*dy);
+                                 bfdyf(4) = 1/dy - (xr/(dx*dy));
+                         end
+                               
+                         switch n
+                             case 1
+                                 bff(1) = (1-xr/dx)*(1-yr/dy);
+                                 bfdxf(1) = -1/dx + (yr/(dx*dy));
+                                 bfdyf(1) = -1/dy + (xr/(dx*dy));
+                             case 2
+                                 bff(2) = (xr/dx)*(1-yr/dy);
+                                 bfdxf(2) = 1/dx - (yr/(dx*dy));
+                                 bfdyf(2) = -xr/(dx*dy);
+                             case 3
+                                 bff(3) = (xr/dx)*(yr/dy);
+                                 bfdxf(3) = yr/(dx*dy);
+                                 bfdyf(3) = xr/(dx*dy);
+                             case 4
+                                 bff(4) = (1-xr/dx)*(yr/dy);
+                                 bfdxf(4) = -yr/(dx*dy);
+                                 bfdyf(4) = 1/dy - (xr/(dx*dy));
+                         end
 
                          %Adding up the integral
-                         conv = (wx*bf.dxf(m) + wy*bf.dyf(m)) * bf.f(n);
-                         diff = par.PhysCst(8)*(bf.dxf(m)*bf.dxf(n) + ...
-                                bf.dyf(m)*bf.dyf(n));
-                         F_xy = diff + conv + sigma*bf.f(m)*bf.f(n);
-                         WF_xy= qd.quad_w(i)*qd.quad_w(j)*F_xy*((dx*dy)/4);
+                         conv = (wx*bfdxf(m) + wy*bfdyf(m)) * bff(n);
+                         diff = D*(bfdxf(m)*bfdxf(n) + ...
+                                bfdyf(m)*bfdyf(n));
+                         F_xy = diff + conv + sigma*bff(m)*bff(n);
+                         WF_xy= qdquad_w(i)*qdquad_w(j)*F_xy*((dx*dy)/4);
                          bf.Aloc(k,m,n) = bf.Aloc(k,m,n) + WF_xy;
                      end
                  end

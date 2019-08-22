@@ -7,7 +7,6 @@ qd = class.quad;
 bf = class.BasFunc;
 sp = class.AIJ;
 filename = 'myparam.dat';
-
 ActualParam = subroutines.init(ActualParam, filename); 
 ActualParam = subroutines.LGM(ActualParam);
 ActualParam = subroutines.NBE(ActualParam);
@@ -15,7 +14,7 @@ toc
 %% Part 2: Matrix A
 tic
 qd = subroutines.quad_calc(ActualParam, qd);
-bf = subroutines.calAloc4(ActualParam,qd,bf);
+bf = subroutines.calAloc(ActualParam,qd,bf);
 sp = subroutines.GlobalMap(ActualParam, sp);
 ActualParam = subroutines.bcond(ActualParam);
 sp = subroutines.assembly(ActualParam, sp, bf);
