@@ -26,7 +26,7 @@ physical constants
 0.1	 : PhysCst(5) :constant source term
 1	 : PhysCst(6) :penalization coefficient (between 1 ~ 2)
 0.2      : PhysCst(7) :diameter of obstacles
-0.05     : PhysCst(8) :diffusion parameter
+0.05     : PhysCst(8) :diffusion parameter (0.05)
 d	 : top bc kind          (n : Neumann ;     d : Dirichlet)
 d	 : bottom bc kind	(n : Neumann ;     d : Dirichlet)
 d	 : left bc kind		(n : Neumann ;     d : Dirichlet)
@@ -40,8 +40,8 @@ fine properties
 -------------------------------
 velocity vector
 -------------------------------
-2*x*y	 : wx          (write in something interpretable by MATLAB)
-y^2 - x^2	 : wy	       (write in something interpretable by MATLAB)
+2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
+-2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)
 -------------------------------
 Source Terms
 -------------------------------

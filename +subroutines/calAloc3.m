@@ -1,4 +1,4 @@
-function bf = calAloc(par, qd, bf)
+function bf = calAloc3(par, qd, bf)
 % CALALOC Creates the local solutions for Matrix A.
 %   par = An object belonging to the Param Class
 %   qd = An object belonging to the quad class
@@ -7,7 +7,10 @@ function bf = calAloc(par, qd, bf)
 %   This function also has a fancy wait bar due to how long it takes to 
 %   generate the local matrix solutions
 %
-%   This is the original, copied exactly as Bagus's code
+%   This one uses a switch case, which is an if but better.
+%   This does a smiliar thing with calAloc 2, but instead of functions it
+%   uses the inline function which means it doesnt have to call to
+%   something, making it more efficient.
 
     diam = par.PhysCst(7);
     nobs = par.NumCst(6) + 1;
@@ -71,26 +74,47 @@ function bf = calAloc(par, qd, bf)
              for n = 1:par.NumCst(1)
                  bf.Aloc(k,m,n) = 0;
                  for i = 1:par.NumCst(4)
+                     xr = (dx/2)* qd.quad_x0(i) + dx/2;
                      for j = 1:par.NumCst(4)
                          %quadrature coordinates
-                         xr = (dx/2)* qd.quad_x0(i) + dx/2;
                          yr = (dy/2)* qd.quad_x0(j) + dy/2;
-
-                         %basis functions
-                         bf.f(1) = (1-xr/dx)*(1-yr/dy);
-                         bf.f(2) = (xr/dx)*(1-yr/dy);
-                         bf.f(3) = (xr/dx)*(yr/dy);
-                         bf.f(4) = (1-xr/dx)*(yr/dy);
-
-                         %derivatives
-                         bf.dxf(1) = -1/dx + (yr/(dx*dy));
-                         bf.dyf(1) = -1/dy + (xr/(dx*dy));
-                         bf.dxf(2) = 1/dx - (yr/(dx*dy));
-                         bf.dyf(2) = -xr/(dx*dy);
-                         bf.dxf(3) = yr/(dx*dy);
-                         bf.dyf(3) = xr/(dx*dy);
-                         bf.dxf(4) = -yr/(dx*dy);
-                         bf.dyf(4) = 1/dy - (xr/(dx*dy));
+                         switch m
+                             case 1
+                                 bf.f(1) = (1-xr/dx)*(1-yr/dy);
+                                 bf.dxf(1) = -1/dx + (yr/(dx*dy));
+                                 bf.dyf(1) = -1/dy + (xr/(dx*dy));
+                             case 2
+                                 bf.f(2) = (xr/dx)*(1-yr/dy);
+                                 bf.dxf(2) = 1/dx - (yr/(dx*dy));
+                                 bf.dyf(2) = -xr/(dx*dy);
+                             case 3
+                                 bf.f(3) = (xr/dx)*(yr/dy);
+                                 bf.dxf(3) = yr/(dx*dy);
+                                 bf.dyf(3) = xr/(dx*dy);
+                             case 4
+                                 bf.f(4) = (1-xr/dx)*(yr/dy);
+                                 bf.dxf(4) = -yr/(dx*dy);
+                                 bf.dyf(4) = 1/dy - (xr/(dx*dy));
+                         end
+                               
+                         switch n
+                             case 1
+                                 bf.f(1) = (1-xr/dx)*(1-yr/dy);
+                                 bf.dxf(1) = -1/dx + (yr/(dx*dy));
+                                 bf.dyf(1) = -1/dy + (xr/(dx*dy));
+                             case 2
+                                 bf.f(2) = (xr/dx)*(1-yr/dy);
+                                 bf.dxf(2) = 1/dx - (yr/(dx*dy));
+                                 bf.dyf(2) = -xr/(dx*dy);
+                             case 3
+                                 bf.f(3) = (xr/dx)*(yr/dy);
+                                 bf.dxf(3) = yr/(dx*dy);
+                                 bf.dyf(3) = xr/(dx*dy);
+                             case 4
+                                 bf.f(4) = (1-xr/dx)*(yr/dy);
+                                 bf.dxf(4) = -yr/(dx*dy);
+                                 bf.dyf(4) = 1/dy - (xr/(dx*dy));
+                         end
 
                          %Adding up the integral
                          conv = (wx*bf.dxf(m) + wy*bf.dyf(m)) * bf.f(n);
