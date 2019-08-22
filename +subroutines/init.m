@@ -113,7 +113,6 @@ function prm = init(prm, filename)
     prm.wy = extractdata(C,44,'func');
     
     %Adding Source Terms
-    
     prm.nSource = extractdata(C, 48, 'num');
     prm.sourceterms = zeros(prm.nSource, 5);
     for k = 1:prm.nSource

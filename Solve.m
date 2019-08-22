@@ -1,4 +1,4 @@
-
+%This script solves the matrix after it has been initialized
 %% Part 4: Solving
 load('soltec.mat')
 tic

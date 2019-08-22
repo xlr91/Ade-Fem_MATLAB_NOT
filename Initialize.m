@@ -1,4 +1,5 @@
-%Some introductionary lines here
+%This script generates Matrix A and the RHS Matrix in the sparse form
+%Run the solve script to solve the system of linear equations
 %% Part 1: Initialization
 tic
 

@@ -2,7 +2,6 @@ function bf = calRHSlocori(par, qd, bf)
 
     bf.rhsLoc = zeros(par.Tne, par.NumCst(1));
 
-    %actually idk what this is for 
     %a = ((par.xmax - par.xmin )/3) + par.xmin;
     %b = a + ((par.xmax - par.xmin ) / 3);
     %c = ((par.ymax - par.ymin ) / 3) + par.ymin;

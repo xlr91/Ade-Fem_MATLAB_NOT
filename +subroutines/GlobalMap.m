@@ -15,7 +15,7 @@ function sp = GlobalMap(par, sp)
                     for k1 = 1:8 
                         k2 = par.Nbe(k,k1);
                         
-                        %justincase
+                        %justincase k2 returns a nonexistent element
                         if k2 > par.Tne
                             k2 = 0;
                         end
@@ -31,6 +31,7 @@ function sp = GlobalMap(par, sp)
                                     m1 = n2;
                                 end
                             end
+                            
                             %if n1 and m1 nodes in the neighbors
                             %and n and m nodes in the original
                             %return the same global nodes

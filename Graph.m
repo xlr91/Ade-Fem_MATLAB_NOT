@@ -1,4 +1,5 @@
-
+% This script takes the solved matrix and graphs it
+% It is useful to use this if the environment is large
 
 %Put in the finished soltec.mat file here
 load('soltec.mat')

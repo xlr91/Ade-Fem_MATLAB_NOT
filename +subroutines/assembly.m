@@ -1,6 +1,9 @@
 function sp = assembly(par, sp, bf)
 % Assembly creates the sparse matrix elements A, IRN, and JCN.
-%   prm = An object belonging to the Param Class
+%   par = An object belonging to the Param Class
+%   sp = An object belonging to the AIJ class
+%   bf = An object belonging to the BasFunc class
+
     sp.A = zeros(1, (sp.nonzero + 2*par.Nbc));
     sp.IRN = sp.A;
     sp.JCN = sp.A;

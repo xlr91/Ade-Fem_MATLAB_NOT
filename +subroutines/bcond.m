@@ -67,14 +67,14 @@ function prm = bcond(prm)
                    prm.qbcval(j+(i-1)) = prm.PhysCst(4);
                end
                j = j + prm.NumCst(3) - 2;
-            else %if bottom is not d
+            else %if only bottom is not d
                 for i = 1:prm.NumCst(3) - 1
                     prm.qbc(i+j) = prm.rnode(i);
                     prm.qbcval(i+j) = prm.PhysCst(4);
                 end
                 j = j+prm.NumCst(3) - 1;
             end
-        elseif string(prm.bottom) == 'd' %if top is not d
+        elseif string(prm.bottom) == 'd' %if only top is not d
             for i = 2, prm.NumCst(3)
                 prm.qbc(j+(i-1)) = prm.rnode(i);
                 prm.qbcval(j+(i-1)) = prm.PhysCst(4);

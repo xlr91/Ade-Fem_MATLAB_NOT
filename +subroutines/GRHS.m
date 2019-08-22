@@ -1,5 +1,9 @@
 function sp = GRHS(sp, par, bf)
-
+% GRHS Generates the Global Right Hand Side matrix.
+%   par = An object belonging to the Param Class
+%   bf = An object belonging to the BasFunc class
+%   sp = An object belonging to the AIJ class
+%
     sp.RHS = zeros(1, (par.Tnp+par.Nbc));
 
     %Add in the values for the nodes in the RHS

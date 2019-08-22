@@ -7,12 +7,9 @@ function bf = calAloc(par, qd, bf)
 %   This function also has a fancy wait bar due to how long it takes to 
 %   generate the local matrix solutions
 %
-%   This is a copy of calAloc3, with key differences. It was realized the
-%   xr did not need to be in the j loop, so that removes a bunch of
-%   calculations from the for loop. Furthermore, the biggest improvement
-%   was loading the variables into this calAloc4 function rather than
-%   having the function call out external classes. This seems to have
-%   drastically increased the performance.
+%   This is a slightly modified code of Bagus' original, in order to
+%   increase the efficiency. The original code can be found in calAlocori.
+
 
     diam = par.PhysCst(7);
     nobs = par.NumCst(6) + 1;
@@ -21,8 +18,8 @@ function bf = calAloc(par, qd, bf)
     bff = zeros(1,par.NumCst(1));
     bfdxf = zeros(1,par.NumCst(1));
     bfdyf = zeros(1,par.NumCst(1));
+    
     a = zeros(1,nobs);
-
     eps = (par.xmax - par.xmin) / (nobs-1);
     if nobs == 0
         eps = 0; 
@@ -41,7 +38,9 @@ function bf = calAloc(par, qd, bf)
     qdquad_x0 = qd.quad_x0;
     qdquad_w = qd.quad_w;
     D = par.PhysCst(8);
+    
     for k = 1:par.Tne %for all elements
+         %Element parameters
          xmin = par.leX(k,1);    
          xmax = par.leX(k,2);
          ymin = par.leY(k,1);
