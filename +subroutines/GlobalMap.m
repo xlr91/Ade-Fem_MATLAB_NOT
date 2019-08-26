@@ -6,6 +6,17 @@ function sp = GlobalMap(par, sp)
     sp.nonzero = 0;
     sp.GML = zeros(par.Tne, par.NumCst(1), par.NumCst(1));
     for k = 1:par.Tne
+        
+         %Fancy Wait Bar
+         if round(k/par.Tne*100, -1) > round((k-1)/par.Tne*100, -1)
+            wbmsg = sprintf('GlobalMap In progress: %.1f%%', k/par.Tne*100);
+            if ~exist('wb', 'var')
+                wb = waitbar((k-1)/par.Tne, wbmsg);
+            else
+                waitbar((k-1)/par.Tne, wb, wbmsg);
+            end
+         end
+       
         for n = 1:par.NumCst(1)
             for m = 1:par.NumCst(1)
                 if sp.GML(k,n,m) == 0 %checks if a value already exists
@@ -44,4 +55,5 @@ function sp = GlobalMap(par, sp)
             end
         end
     end
+close(wb)
 end

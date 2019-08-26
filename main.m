@@ -34,6 +34,7 @@ RHS = RHS.';
 x = A\RHS;
 toc
 %% Part 5: Output
+tic
 [xg,yg] = meshgrid(ActualParam.xmin:ActualParam.h(1):ActualParam.xmax,...
 ActualParam.ymin:ActualParam.h(2):ActualParam.ymax);
 i = 1;
@@ -51,5 +52,6 @@ xlabel('x axis')
 ylabel('y axis')
 zlabel('Concentration u')
 colorbar
+toc
 %% Part 6: Saving
 save('soltec.mat')

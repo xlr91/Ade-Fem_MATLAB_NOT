@@ -5,7 +5,7 @@ Solving the Advection-Diffusion Equation based on Bagus Muljadi's Fortran Code. 
 ## Table of Contents
 * [Demo](#Demo) 
 1.  Introduction
-2.  Usage
+2.  User Guide
 3. Technical Descriptions 
     * Definitions 
         (these are like global node numbers, local node numbers, etc that terms will be used throughout this guide)
@@ -13,11 +13,13 @@ Solving the Advection-Diffusion Equation based on Bagus Muljadi's Fortran Code. 
     * Part 1: Initialization
     * Part 2: Matrix A
     * Part 3: RHS Matrix
-    * Part 4: Solving
-    * Part 5: Saving
-    * Part 6: Displaying
 ## Demo
 
+
+## User Guide
+- talk about the myparam.dat
+
+## Technical Guide
 ## Definitions
 - list down important things with figures, such as global node numbers, local node numbers, neighbor elements, and shit likt that
 ## Classes
@@ -127,4 +129,28 @@ The Initialization part of the program reads the param.dat data file, loads it i
 
 ### extractdata
 In order to read the data from the dat file properly, a custom function was defined. It converts the MATLAB data from the importdata function and returns the needed value, whether it is a number, string, or function.
+
+## Part 2: Matrix A
+### Introduction
+The Matrix A part uses the parameter data to create the sparse matrix A. It does this by calculating the local element matrix (see theory guide), and then assembling them into a single matrix. Due to the sparsity of the generated matrix, the matrix is stored as a sparse matrix consisting of sp.A, sp.IRN, sp.JCN. Details can be found in the sparse class description. 
+### calAloc
+This is the bit that calculates the local matrix elements. a, b, c, and d are the obstacle parameters. The for loop logic goes like 
+for all elements...
+    check if the element is an 'obstacle' element or not
+    for all local node pairs...
+        for all quadrature points...
+            calculate the basis funtions and sum it all up
+It sequentially calculates the basis functions for each node pairs. Why the code does this can be found in the theory guide. 
+An efficiency trick here used in this, compared to the original calAloc, was that the switch case was used, which allows the function to only evaluate the required basis functions. Furthermore, the bfdxf and bfdyf values are no longer stored in the BasFunc class but are instead stored within this function which increases efficiency. MATLAB now only needs to look inside this function instead of calling an external class, which takes time. 
+
+### GlobalMap
+What global map does is it generates a 'map' of the domain. EXAMPLE HERE EYET YEET AND EXPLAIN SOMETHING SOMETHING SUPPORT. 
+
+### bcond
+
+### assembly
+
+### lagmul
+
+## Part 3 Matrix RHS
 

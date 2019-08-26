@@ -28,10 +28,10 @@ function bf = calAloc(par, qd, bf)
         a(m) = par.xmin + m*eps-eps;
     end 
     
-    b = a + 0.5D0*diam*eps; %xmax of boundaries
-    a = a - 0.5D0*diam*eps; %xmin of boundaries
-    c = a; %ymin of boundaries
-    d = b; %ymax of boundaries
+    b = a + 0.5D0*diam*eps; %xmax of obstacle
+    a = a - 0.5D0*diam*eps; %xmin of obstacle
+    c = a; %ymin of obstacle
+    d = b; %ymax of obstacle
     
     wxf = par.wx;
     wyf = par.wy;

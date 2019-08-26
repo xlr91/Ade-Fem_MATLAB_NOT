@@ -8,25 +8,25 @@ domain (mesh)
 -------------------------------
 numerical constants
 -------------------------------
-6	: number of parameters
-4	: numCst(1) : number of nodes in rectangle elements
-129	: numCst(2) : number of points in X (10) , 3
-129	: numCst(3) : number of points in Y (10) , 3
-3	: numCst(4) : number of quadrature points (3)
+6	: number of parameters (fixed)
+4	: numCst(1) : number of nodes in rectangle elements (fixed)
+129	: numCst(2) : number of points in X (int)
+129	: numCst(3) : number of points in Y (int)
+3	: numCst(4) : number of quadrature points (1,2,3,4,5,7)
 5000 	: numCst(5) : mumps upper bound memory allocation
-3      : numCst(6) : amount of obstacles (regular) in one axis (0), 1
+5      : numCst(6) : amount of obstacles (regular) in one axis (int)
 --------------------------------
 physical constants
 --------------------------------
-8	 : number of parameters
-0	 : PhysCst(1) :top bc. value (0)
-0	 : PhysCst(2) :bottom bc. value (0)
-0	 : PhysCst(3) :left bc. value (0) 
-0	 : PhysCst(4) :right bc. value (0) 
+8	 : number of parameters (fixed)
+0	 : PhysCst(1) :top bc. value
+0	 : PhysCst(2) :bottom bc. value
+0	 : PhysCst(3) :left bc. value
+0	 : PhysCst(4) :right bc. value
 0.1	 : PhysCst(5) :constant source term
 1	 : PhysCst(6) :penalization coefficient (between 1 ~ 2)
 0.2      : PhysCst(7) :diameter of obstacles
-0.05     : PhysCst(8) :diffusion parameter (0.05)
+0.05     : PhysCst(8) :diffusion parameter
 d	 : top bc kind          (n : Neumann ;     d : Dirichlet)
 d	 : bottom bc kind	(n : Neumann ;     d : Dirichlet)
 d	 : left bc kind		(n : Neumann ;     d : Dirichlet)
@@ -34,17 +34,17 @@ d	 : right bc kind	(n : Neumann ;     d : Dirichlet)
 -------------------------------
 fine properties
 -------------------------------
-2	 : number of parameters
+2	 : number of parameters (fixed)
 4	 : FineCst(1)  : number of fine points in X
 4	 : FineCst(2)  : number of fine points in Y
 -------------------------------
 velocity vector
 -------------------------------
-2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
--2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)
+-2*y*(1-x^2)	 : wx          (write in something interpretable by MATLAB)
+2*x*(1-y^2)	 : wy	       (write in something interpretable by MATLAB)
 -------------------------------
 Source Terms (format it as [xmin xmax ymin ymax value])  
 -------------------------------
-2	 : number of source terms 
+2	 : number of source terms (fixed)
 [-1 1 0.7 1 1]	: Source 1
 [-1 1 -1 -0.7 1]	: Source 2

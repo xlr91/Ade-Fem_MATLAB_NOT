@@ -10,8 +10,8 @@ function sp = assembly(par, sp, bf)
     for k = 1:par.Tne
         for n = 1: par.NumCst(1)
             for m = 1:par.NumCst(1)
-                l = sp.GML(k,n,m);
-                sp.A(l) = sp.A(l) + bf.Aloc(k,n,m);
+                l = sp.GML(k,m,n); %mungkin terbalik yeah imma flip it
+                sp.A(l) = sp.A(l) + bf.Aloc(k,m,n); %mungkin terbalik
                 sp.IRN(l) = par.Lgm(k,n);
                 sp.JCN(l) = par.Lgm(k,m);
             end
