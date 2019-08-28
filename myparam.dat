@@ -14,7 +14,7 @@ numerical constants
 129	: numCst(3) : number of points in Y (int)
 3	: numCst(4) : number of quadrature points (1,2,3,4,5,7)
 5000 	: numCst(5) : mumps upper bound memory allocation
-5      : numCst(6) : amount of obstacles (regular) in one axis (int)
+3      : numCst(6) : amount of obstacles (regular) in one axis (int)
 --------------------------------
 physical constants
 --------------------------------

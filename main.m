@@ -1,4 +1,3 @@
-%Some introductionary lines here
 %% Part 1: Initialization
 tic
 clear; close; clc;
@@ -31,7 +30,7 @@ tic
 A = sparse(sp.IRN, sp.JCN, sp.A);
 RHS = sparse(sp.RHS);
 RHS = RHS.';
-x = A\RHS;
+u = A\RHS;
 toc
 %% Part 5: Output
 tic
@@ -39,9 +38,9 @@ tic
 ActualParam.ymin:ActualParam.h(2):ActualParam.ymax);
 i = 1;
 zg = zeros(ActualParam.NumCst(3),ActualParam.NumCst(2));
-for yi = 1:ActualParam.NumCst(3)
-    for xi = 1:ActualParam.NumCst(2)
-        zg(yi,xi) = x(i);
+for xi = 1:ActualParam.NumCst(3)
+    for yi = 1:ActualParam.NumCst(2)
+        zg(xi,yi) = u(i);
         i = i+1;
     end
 end

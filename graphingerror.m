@@ -1,7 +1,7 @@
 D = importdata('sol.tec');
 %%
-inum = 1025;
-jnum = 1025;
+inum = 1025; %number of nodes in x
+jnum = 1025; %number of nodes in y
 n = 1;
 testxg = zeros(inum,jnum);
 testyg = testxg;
